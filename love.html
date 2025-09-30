@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给宁宁的惊喜</title>
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: 'Microsoft YaHei', serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 手写书法元素样式 */
+        .flourish {
+            position: absolute;
+            opacity: 0.12;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .flourish-1 {
+            top: 5%;
+            left: 3%;
+            width: 100px;
+            transform: rotate(-10deg);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .flourish-2 {
+            bottom: 10%;
+            right: 5%;
+            width: 90px;
+            transform: rotate(20deg);
+            animation: float 10s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(var(--rotate, 0deg)); }
+            50% { transform: translateY(-15px) rotate(var(--rotate, 0deg)); }
+        }
+
+        /* 标题样式 */
+        h1 {
+            color: #e84393;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        /* 图文组合样式 */
+        .content-section {
+            display: flex;
+            align-items: center;
+            margin: 60px 0;
+            gap: 40px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out forwards;
+        }
+
+        .content-section:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .content-section:nth-child(1) { animation-delay: 0.5s; }
+        .content-section:nth-child(2) { animation-delay: 1.5s; }
+        .content-section:nth-child(3) { animation-delay: 2.5s; }
+        .content-section:nth-child(4) { animation-delay: 3.5s; }
+
+        .text-content {
+            flex: 1;
+            text-align: left;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .photo-content {
+            flex: 1;
+            position: relative;
+        }
+
+        .story-photo {
+            width: 100%;
+            max-width: 300px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 6px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .story-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .photo-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 代码情诗样式 */
+        .code-poem {
+            background: #f8f9fa;
+            border-left: 4px solid #e84393;
+            padding: 25px;
+            margin: 40px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            border-radius: 0 15px 15px 0;
+            animation: fadeInUp 2s ease-out 4s both;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        /* 签名样式 */
+        .signature {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #f0f0f0;
+            animation: fadeInUp 2s ease-out 4.5s both;
+        }
+
+        .handwritten {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 2em;
+            color: #e84393;
+            margin: 10px 0;
+        }
+
+        .heart {
+            color: #ff6b6b;
+            font-size: 24px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            to { transform: scale(1); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            .content-section {
+                flex-direction: column !important;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .text-content {
+                text-align: center;
+            }
+            
+            h1 { font-size: 2em; }
+            
+            .story-photo {
+                max-width: 250px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 手写书法装饰元素 -->
+    <img src="flourish1.png" alt="Flourish" class="flourish flourish-1">
+    <img src="flourish2.png" alt="Flourish" class="flourish flourish-2">
+
+    <div class="container">
+        <h1>To My Dearest <span class="heart">♥</span> Ella</h1>
+
+        <!-- 第一部分：初次相遇 -->
+        <div class="content-section">
+            <div class="text-content">
+                <p>还记得我们第一次在羽毛球馆见面吗？</p>
+                <p>你的一颦一笑，春水般荡进了我的心田。</p>
+                <p>无限思绪，卷不断，理还乱……</p>
+                <p>一个如此简单的邂逅，竟开启如此美好的旅程</p>
+            </div>
+            <div class="photo-content">
+                <img src="photo1.jpg" alt="我们的初次相遇" class="story-photo">
+                <div class="photo-caption">那个永远改变我人生轨迹的日子</div>
+            </div>
+        </div>
+
+        <!-- 第二部分：美好时光 -->
+        <div class="content-section">
+            <div class="text-content">
+                <p>和你在一起的每一天，如今想来都历历在目</p>
+                <p>一起聆听过肖邦的乐章</p>
+                <p>你银铃般的嗓音在我耳畔激荡</p>
+                <p>一次次闯入我的心房</p>
+                <p>拨开了我心底最温柔的土壤</p>
+            </div>
+            <div class="photo-content">
+                <img src="photo2.jpg" alt="我们的美好时光" class="story-photo">
+                <div class="photo-caption">每一帧都值得永久存储的回忆</div>
+            </div>
+        </div>
+
+        <!-- 第三部分：深情告白 -->
+        <div class="content-section">
+            <div class="text-content">
+                <p>你说你永远长不大，我说那是你心头的烂漫与纯粹</p>
+                <p>我说我永远改不了，你说那是我心底的坚定与沉醉</p>
+                <p>我本痴情人，偏逢钟情女。</p>
+                <p>情深情浓，你我情种</p>
+            </div>
+            <div class="photo-content">
+                <img src="photo3.jpg" alt="深情时刻" class="story-photo">
+                <div class="photo-caption">你让我的世界变得完整</div>
+            </div>
+        </div>
+
+        <!-- 代码情诗 -->
+        <div class="code-poem">
+            <h3>我们的爱情算法</h3>
+            <pre>
+function ourFuture() {
+    while (time.exists()) {
+        myHeart.beatsFor(you);
+        ourLove.growStronger();
+        createMemoriesTogether();
+    }
+    return "Happily Ever After";
+}
+
+// 执行这个美好的未来
+let destiny = ourFuture();
+            </pre>
+        </div>
+
+        <!-- 第四部分：承诺与未来 -->
+        <div class="content-section">
+            <div class="text-content">
+                <p>我们的未来还有太多要一起做的事呢</p>
+                <p>要一起去看青蓝的大海</p>
+                <p>要一起去看皑皑的白雪</p>
+                <p>要一起住进北欧的木屋</p>
+                <p>看那星辰漫漫，银河灿灿</p>
+            </div>
+            <div class="photo-content">
+                <img src="photo4.jpg" alt="我们的未来" class="story-photo">
+                <div class="photo-caption">期待与你共度的每一个明天</div>
+            </div>
+        </div>
+
+        <!-- 签名 -->
+        <div class="signature">
+            <p>With all my love,</p>
+            <p class="handwritten">huihui～</p>
+            <p>一个普通的、爱你的清晨 <span class="heart">♥</span></p>
+        </div>
+    </div>
+
+    <script>
+        // 添加照片点击放大效果
+        document.querySelectorAll('.story-photo').forEach(photo => {
+            photo.addEventListener('click', function() {
+                this.style.transform = this.style.transform === 'scale(1.8)' ? 'scale(1)' : 'scale(1.8)';
+                this.style.zIndex = this.style.zIndex === '10' ? '1' : '10';
+            });
+        });
+
+        // 心形图标点击效果
+        document.querySelectorAll('.heart').forEach(heart => {
+            heart.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'heartbeat 1.5s ease-in-out infinite';
+                }, 10);
+            });
+        });
+    </script>
+</body>
+</html>
